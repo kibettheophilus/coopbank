@@ -36,7 +36,7 @@ fun CardResponse.toEntity() = CardEntity(
     status,
     type,
     userId,
-    wallets = wallets.map { it.toEntity() }
+//    wallets = wallets.map { it.toEntity() }
 )
 
 fun WalletResponse.toEntity() = WalletEntity(
@@ -46,7 +46,8 @@ fun WalletResponse.toEntity() = WalletEntity(
 
 
 fun UserDto.toEntity() = UserEntity(
-    address = address.toEntity(), avatarUrl, email, firstName, id, lastName, phone
+//    address = address.toEntity(),
+    avatarUrl, email, firstName, id, lastName, phone
 )
 
 fun AddressResponse.toEntity() = AddressEntity(

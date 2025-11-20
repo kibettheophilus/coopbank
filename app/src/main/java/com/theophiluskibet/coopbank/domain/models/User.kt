@@ -1,7 +1,7 @@
 package com.theophiluskibet.coopbank.domain.models
 
 data class User(
-    val address: Address,
+//    val address: Address,
     val avatarUrl: String,
     val email: String,
     val firstName: String,

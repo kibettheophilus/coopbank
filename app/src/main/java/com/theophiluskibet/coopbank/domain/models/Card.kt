@@ -15,7 +15,7 @@ data class Card(
     val status: String,
     val type: String,
     val userId: String,
-    val wallets: List<Wallet>
+//    val wallets: List<Wallet>
 )
 
 data class Wallet(

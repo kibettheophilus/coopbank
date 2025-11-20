@@ -36,7 +36,7 @@ fun CardEntity.toDomain() = Card(
     status,
     type,
     userId,
-    wallets = wallets.map { it.toDomain() }
+//    wallets = wallets.map { it.toDomain() }
 )
 
 fun WalletEntity.toDomain() = Wallet(
@@ -46,7 +46,8 @@ fun WalletEntity.toDomain() = Wallet(
 
 
 fun UserEntity.toDomain() = User(
-    address = address.toDomain(), avatarUrl, email, firstName, id, lastName, phone
+//    address = address.toDomain(),
+    avatarUrl, email, firstName, id, lastName, phone
 )
 
 fun AddressEntity.toDomain() = Address(

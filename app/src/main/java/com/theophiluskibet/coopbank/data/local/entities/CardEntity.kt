@@ -2,6 +2,7 @@ package com.theophiluskibet.coopbank.data.local.entities
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "cards")
 data class CardEntity(
@@ -13,14 +14,14 @@ data class CardEntity(
     val dueDate: String,
     val expiryDate: String,
     val holderName: String,
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     val linkedAccountName: String,
     val name: String,
     val status: String,
     val type: String,
     val userId: String,
-    @Embedded
-    val wallets: List<WalletEntity>
+//    val wallets: List<WalletEntity> //todo: check reason failing
 )
 
 data class WalletEntity(
