@@ -20,7 +20,7 @@ class BankApiImpl(private val httpClient: HttpClient) : BankApi {
     }
 
     override suspend fun getTransactions(): Result<TransactionsResponse> = safeApiCall {
-        httpClient.get("cardTransactionsg").body()
+        httpClient.get("cardTransactions").body()
     }
 
     override suspend fun getUser(): Result<UserResponse> = safeApiCall {
