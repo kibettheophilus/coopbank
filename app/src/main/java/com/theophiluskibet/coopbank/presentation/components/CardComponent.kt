@@ -33,8 +33,11 @@ fun formatCardNumber(number: String): String {
 
 fun provideDrawable(card: Card): Int {
     return when (card.type) {
-        CardType.CREDIT.name -> R.drawable.card
-        else -> R.drawable.card
+        CardType.CREDIT.name -> R.drawable.credit_card
+        CardType.DEBIT.name -> R.drawable.debit_card
+        CardType.PREPAID.name -> R.drawable.prepaid_card
+        CardType.MULTICURRENCY.name -> R.drawable.multi_card
+        else -> R.drawable.credit_card
     }
 }
 
