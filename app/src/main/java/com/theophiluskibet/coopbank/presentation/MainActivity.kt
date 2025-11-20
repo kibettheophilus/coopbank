@@ -1,4 +1,4 @@
-package com.theophiluskibet.coopbank
+package com.theophiluskibet.coopbank.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.theophiluskibet.coopbank.ui.theme.CoopBankTheme
+import com.theophiluskibet.coopbank.presentation.ui.theme.CoopBankTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

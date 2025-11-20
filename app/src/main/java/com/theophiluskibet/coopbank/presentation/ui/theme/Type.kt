@@ -1,4 +1,4 @@
-package com.theophiluskibet.coopbank.ui.theme
+package com.theophiluskibet.coopbank.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

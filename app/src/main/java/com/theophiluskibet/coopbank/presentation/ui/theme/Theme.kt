@@ -1,6 +1,5 @@
-package com.theophiluskibet.coopbank.ui.theme
+package com.theophiluskibet.coopbank.presentation.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
