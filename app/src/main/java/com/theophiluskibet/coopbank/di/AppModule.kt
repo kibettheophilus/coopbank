@@ -1,5 +1,7 @@
 package com.theophiluskibet.coopbank.di
 
+import androidx.room.Room
+import com.theophiluskibet.coopbank.data.local.database.BankDatabase
 import com.theophiluskibet.coopbank.data.remote.BankApi
 import com.theophiluskibet.coopbank.data.remote.BankApiImpl
 import io.ktor.client.HttpClient
@@ -21,6 +23,14 @@ const val BASE_URL = "card-services.free.beeceptor.com"
 val appModule = module {
     single<BankApi> { BankApiImpl(httpClient = get()) }
     singleOf(::createHttpClient)
+    single {
+        Room.databaseBuilder(
+            context = get(),
+            klass = BankDatabase::class.java,
+            name = "bank_database.db"
+        ).fallbackToDestructiveMigration(dropAllTables = false)
+            .build()
+    }
 }
 
 private fun createHttpClient(engine: HttpClientEngine = OkHttp.create()) =

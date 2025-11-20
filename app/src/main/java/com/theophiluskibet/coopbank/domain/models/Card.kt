@@ -1,14 +1,6 @@
-package com.theophiluskibet.coopbank.data.remote.dtos
+package com.theophiluskibet.coopbank.domain.models
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class CardsResponse(
-    val cards: List<CardResponse>
-)
-
-@Serializable
-data class CardResponse(
+data class Card(
     val balance: Double,
     val cardNumber: String,
     val creditLimit: Double,
@@ -23,11 +15,10 @@ data class CardResponse(
     val status: String,
     val type: String,
     val userId: String,
-    val wallets: List<WalletResponse>
+    val wallets: List<Wallet>
 )
 
-@Serializable
-data class WalletResponse(
+data class Wallet(
     val balance: Double,
     val currency: String,
     val flag: String

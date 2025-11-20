@@ -1,11 +1,15 @@
 package com.theophiluskibet.coopbank.data.remote.dtos
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UserResponse(
-    val user: User
+    val user: UserDto
 )
 
-data class User(
-    val address: Address,
+@Serializable
+data class UserDto(
+    val address: AddressResponse,
     val avatarUrl: String,
     val email: String,
     val firstName: String,
@@ -14,7 +18,8 @@ data class User(
     val phone: String
 )
 
-data class Address(
+@Serializable
+data class AddressResponse(
     val city: String,
     val country: String,
     val postalCode: String,

@@ -1,14 +1,10 @@
-package com.theophiluskibet.coopbank.data.remote.dtos
+package com.theophiluskibet.coopbank.data.local.entities
 
-import kotlinx.serialization.Serializable
+import androidx.room.Embedded
+import androidx.room.Entity
 
-@Serializable
-data class CardsResponse(
-    val cards: List<CardResponse>
-)
-
-@Serializable
-data class CardResponse(
+@Entity(tableName = "cards")
+data class CardEntity(
     val balance: Double,
     val cardNumber: String,
     val creditLimit: Double,
@@ -23,11 +19,11 @@ data class CardResponse(
     val status: String,
     val type: String,
     val userId: String,
-    val wallets: List<WalletResponse>
+    @Embedded
+    val wallets: List<WalletEntity>
 )
 
-@Serializable
-data class WalletResponse(
+data class WalletEntity(
     val balance: Double,
     val currency: String,
     val flag: String

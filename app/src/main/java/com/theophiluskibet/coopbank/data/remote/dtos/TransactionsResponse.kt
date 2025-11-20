@@ -1,5 +1,13 @@
 package com.theophiluskibet.coopbank.data.remote.dtos
 
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class TransactionsResponse(
+    val transactions: List<TransactionResponse>
+)
+
+@Serializable
 data class TransactionResponse(
     val amount: Double,
     val cardId: String,
