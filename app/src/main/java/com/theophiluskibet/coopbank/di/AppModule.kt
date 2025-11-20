@@ -28,7 +28,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-const val BASE_URL = "card-services.free.beeceptor.com"
+const val BASE_URL = "card3.free.beeceptor.com"
 
 val appModule = module {
     single<BankApi> { BankApiImpl(httpClient = get()) }
