@@ -25,7 +25,7 @@ class BankRepositoryImpl(
             val response = bankApi.getCards()
             when {
                 response.isSuccess -> {
-                    val result = response.getOrThrow().cards.map { it.toEntity() }
+                    val result = response.getOrThrow().map { it.toEntity() }
                     bankDao.saveCards(result)
                     flowOf(Result.success(result.map { it.toDomain() }))
                 }
@@ -74,6 +74,15 @@ class BankRepositoryImpl(
                     flowOf(Result.failure(response.exceptionOrNull() ?: Throwable("Unknown error")))
                 }
             }
+        }
+    }
+
+    override suspend fun getCard(id: String): Flow<Result<Card>> {
+        return try {
+            val result = bankDao.getCardById(id = id)
+            flowOf(Result.success(result.first().toDomain()))
+        } catch (e: Exception) {
+            flowOf(Result.failure(e))
         }
     }
 }

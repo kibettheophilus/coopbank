@@ -17,6 +17,9 @@ interface BankDao {
     @Query("SELECT * FROM cards")
     fun getCards(): Flow<List<CardEntity>>
 
+    @Query("SELECT * FROM cards WHERE id = :id")
+    fun getCardById(id: String): Flow<CardEntity>
+
     @Insert(onConflict = REPLACE)
     fun saveTransactions(transactions: List<TransactionEntity>)
 

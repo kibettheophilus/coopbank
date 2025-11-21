@@ -1,5 +1,6 @@
 package com.theophiluskibet.coopbank.data.remote
 
+import com.theophiluskibet.coopbank.data.remote.dtos.CardResponse
 import com.theophiluskibet.coopbank.data.remote.dtos.CardsResponse
 import com.theophiluskibet.coopbank.data.remote.dtos.TransactionsResponse
 import com.theophiluskibet.coopbank.data.remote.dtos.UserResponse
@@ -9,14 +10,15 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 
 interface BankApi {
-    suspend fun getCards(): Result<CardsResponse>
+    suspend fun getCards(): Result<List<CardResponse>>
     suspend fun getTransactions(): Result<TransactionsResponse>
     suspend fun getUser(): Result<UserResponse>
 }
 
 class BankApiImpl(private val httpClient: HttpClient) : BankApi {
-    override suspend fun getCards(): Result<CardsResponse> = safeApiCall {
-        httpClient.get("getCards").body()
+    override suspend fun getCards(): Result<List<CardResponse>> = safeApiCall {
+        val response: CardsResponse =httpClient.get("getCards").body()
+        response.cards
     }
 
     override suspend fun getTransactions(): Result<TransactionsResponse> = safeApiCall {

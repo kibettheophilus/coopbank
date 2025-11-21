@@ -10,6 +10,7 @@ import com.theophiluskibet.coopbank.domain.repositories.BankRepository
 import com.theophiluskibet.coopbank.helpers.LoggerHelper
 import com.theophiluskibet.coopbank.presentation.screens.allcards.AllCardsViewModel
 import com.theophiluskibet.coopbank.presentation.screens.profile.ProfileViewModel
+import com.theophiluskibet.coopbank.presentation.screens.details.CardDetailsViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
@@ -47,6 +48,7 @@ val appModule = module {
     single { get<BankDatabase>().bankDao() }
     viewModelOf(::AllCardsViewModel)
     viewModelOf(::ProfileViewModel)
+    viewModelOf(::CardDetailsViewModel)
 }
 
 private fun createHttpClient(engine: HttpClientEngine) =

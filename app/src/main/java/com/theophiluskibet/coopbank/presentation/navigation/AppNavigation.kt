@@ -18,7 +18,7 @@ fun AppNavigation() {
     NavHost(
         modifier = Modifier,
         navController = navController,
-        startDestination = AllCards,
+        startDestination = CardDetails(id = "1"),
     ) {
         composable<AllCards> {
             AllCardsScreen()
@@ -26,7 +26,7 @@ fun AppNavigation() {
 
         composable<CardDetails> { backStackEntry ->
             val details: CardDetails = backStackEntry.toRoute()
-            CardDetailScreen()
+            CardDetailScreen(id = details.id)
         }
 
         composable<Profile> {

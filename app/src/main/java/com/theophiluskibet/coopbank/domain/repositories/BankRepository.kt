@@ -9,4 +9,6 @@ interface BankRepository {
     suspend fun getCards(): Flow<Result<List<Card>>>
     suspend fun getTransactions(): Flow<Result<List<Transaction>>>
     suspend fun getUser(): Flow<Result<User>>
+
+    suspend fun getCard(id: String): Flow<Result<Card>>
 }

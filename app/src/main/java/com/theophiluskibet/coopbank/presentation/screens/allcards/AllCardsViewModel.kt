@@ -20,10 +20,6 @@ class AllCardsViewModel(private val bankRepository: BankRepository) : ViewModel(
     private val _allCardsState = MutableStateFlow(AllCardsUiSate())
     val allCardsState: StateFlow<AllCardsUiSate> = _allCardsState.asStateFlow()
 
-    init {
-        getAllCards()
-    }
-
     fun getAllCards() {
         viewModelScope.launch {
             _allCardsState.value = AllCardsUiSate(isLoading = true)
