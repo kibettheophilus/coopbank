@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -22,6 +23,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,22 +50,29 @@ import org.koin.androidx.compose.koinViewModel
 fun CardDetailScreen(
     id: String,
     onBackClick: () -> Unit = {},
-    cardDetailsViewModel: CardDetailsViewModel= koinViewModel()
+    cardDetailsViewModel: CardDetailsViewModel = koinViewModel()
 ) {
 
     val uiState by cardDetailsViewModel.cardDetailsState.collectAsStateWithLifecycle()
 
+    LaunchedEffect(key1 = true) {
+        cardDetailsViewModel.getCard(id = id)
+    }
+    CardDetailScreenContent(uiState = uiState, onBackClick = onBackClick)
+
 }
 
 @Composable
-fun CardDetailScreenContent(uiState: CardDetailsUiState,onBackClick: () -> Unit) {
-    when{
-        uiState.isLoading ->{
+fun CardDetailScreenContent(uiState: CardDetailsUiState, onBackClick: () -> Unit) {
+    when {
+        uiState.isLoading -> {
             LoadingComponent()
         }
+
         uiState.error.isNotEmpty() -> {
             // show error
         }
+
         uiState.data != null -> {
             Scaffold(
                 containerColor = CoopGreen
@@ -110,14 +119,16 @@ fun CardDetailScreenContent(uiState: CardDetailsUiState,onBackClick: () -> Unit)
                             TransactionListHeader()
                         }
 
-                        items(uiState.data) { transaction ->
+                        items(uiState.transactions) { transaction ->
                             TransactionListItem(transaction)
                         }
 
                         item {
-                            Spacer(modifier = Modifier
-                                .height(32.dp)
-                                .background(Color.White))
+                            Spacer(
+                                modifier = Modifier
+                                    .height(32.dp)
+                                    .background(Color.White)
+                            )
                         }
                     }
                 }
@@ -145,7 +156,7 @@ fun TopBarSection(onBackClick: () -> Unit) {
         }
 
         Text(
-            text = ,
+            text = "",// TODO: add users name
             color = Color.White,
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium
@@ -187,7 +198,7 @@ fun BalanceSection() {
             )
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
-                painter = painterResource(id= R.drawable.hide),
+                painter = painterResource(id = R.drawable.hide),
                 contentDescription = "Hide Balance",
                 tint = LightText,
                 modifier = Modifier.size(18.dp)
@@ -202,10 +213,26 @@ fun ActionButtonsRow() {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        ActionButton(painter = painterResource(id = R.drawable.new_card), "New Card", Color(0xFF00ACC1))
-        ActionButton(painter = painterResource(id=R.drawable.deposit), "Deposit", Color(0xFF1E88E5))
-        ActionButton(painter = painterResource(id = R.drawable.withdraw), "Withdraw", Color(0xFF7CB342))
-        ActionButton(painter = painterResource(id=R.drawable.block), "Block Card", Color(0xFFC0CA33))
+        ActionButton(
+            painter = painterResource(id = R.drawable.new_card),
+            "New Card",
+            Color(0xFF00ACC1)
+        )
+        ActionButton(
+            painter = painterResource(id = R.drawable.deposit),
+            "Deposit",
+            Color(0xFF1E88E5)
+        )
+        ActionButton(
+            painter = painterResource(id = R.drawable.withdraw),
+            "Withdraw",
+            Color(0xFF7CB342)
+        )
+        ActionButton(
+            painter = painterResource(id = R.drawable.block),
+            "Block Card",
+            Color(0xFFC0CA33)
+        )
     }
 }
 
@@ -253,5 +280,5 @@ fun TransactionListHeader() {
 @Preview(showBackground = true)
 @Composable
 fun CardDetailScreenPreview() {
-    CardDetailScreen(id="1")
+    CardDetailScreen(id = "1")
 }
