@@ -45,7 +45,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AllCardsScreen(
-    modifier: Modifier = Modifier,
+    onCardClicked: (String) -> Unit ,
     allCardsViewModel: AllCardsViewModel = koinViewModel()
 ) {
     val uiState by allCardsViewModel.allCardsState.collectAsStateWithLifecycle()
@@ -54,11 +54,11 @@ fun AllCardsScreen(
         allCardsViewModel.getAllCards()
     }
 
-    AllCardsScreenContent(uiState = uiState)
+    AllCardsScreenContent(uiState = uiState, onCardClicked = onCardClicked)
 }
 
 @Composable
-fun AllCardsScreenContent(uiState: AllCardsUiSate) {
+fun AllCardsScreenContent(uiState: AllCardsUiSate,onCardClicked: (String) -> Unit) {
     Scaffold(
         containerColor = Color(0xFFF5F5F5),
         topBar = {
@@ -92,7 +92,7 @@ fun AllCardsScreenContent(uiState: AllCardsUiSate) {
                 }
 
                 uiState.cards.isNotEmpty() -> {
-                    LazyContent(cards = uiState.cards)
+                    LazyContent(cards = uiState.cards, onCardClicked = onCardClicked)
                 }
             }
         }
@@ -151,14 +151,14 @@ fun AllCardsHeader() {
 }
 
 @Composable
-fun LazyContent(modifier: Modifier = Modifier, cards: List<Card>) {
+fun LazyContent(modifier: Modifier = Modifier, cards: List<Card>, onCardClicked: (String) -> Unit) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items = cards) { card ->
-            CardComponent(card = card)
+            CardComponent(card =card, onClick = onCardClicked)
         }
         item {
             Spacer(modifier = Modifier.height(24.dp))
@@ -239,7 +239,7 @@ private fun AllCardsScreenPreview() {
                     userId = "user123"
                 )
             )
-        )
+        ),{}
     )
 }
 

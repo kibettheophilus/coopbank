@@ -1,6 +1,7 @@
 package com.theophiluskibet.coopbank.presentation.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,11 +43,12 @@ fun provideDrawable(card: Card): Int {
 }
 
 @Composable
-fun CardComponent(modifier: Modifier = Modifier, card: Card) {
+fun CardComponent(modifier: Modifier = Modifier, card: Card, onClick: (String) -> Unit) {
     Box(
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1.58f)
+            .clickable(onClick = { onClick(card.id) })
     ) {
         Image(
             painter = painterResource(id = provideDrawable(card = card)),

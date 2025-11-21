@@ -18,10 +18,14 @@ fun AppNavigation() {
     NavHost(
         modifier = Modifier,
         navController = navController,
-        startDestination = CardDetails(id = "1"),
+        startDestination = AllCards,
     ) {
         composable<AllCards> {
-            AllCardsScreen()
+            AllCardsScreen(
+                onCardClicked = {
+                    navController.navigate(CardDetails(id = it))
+                }
+            )
         }
 
         composable<CardDetails> { backStackEntry ->
