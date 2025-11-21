@@ -144,7 +144,7 @@ fun CardComponent(modifier: Modifier = Modifier, card: Card) {
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "EVERYDAY CHECKING",
+                text = card.linkedAccountName,
                 color = Color.Gray,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,

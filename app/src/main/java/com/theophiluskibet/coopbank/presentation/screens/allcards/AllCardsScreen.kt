@@ -54,16 +54,14 @@ fun AllCardsScreen(
         allCardsViewModel.getAllCards()
     }
 
-    // We pass the whole UI state to a content wrapper that handles the layout structure
     AllCardsScreenContent(uiState = uiState)
 }
 
 @Composable
 fun AllCardsScreenContent(uiState: AllCardsUiSate) {
     Scaffold(
-        containerColor = Color(0xFFF5F5F5), // Light gray background for the list area
+        containerColor = Color(0xFFF5F5F5),
         topBar = {
-            // Custom Top Header
             AllCardsHeader()
         }
     ) { paddingValues ->
@@ -72,7 +70,6 @@ fun AllCardsScreenContent(uiState: AllCardsUiSate) {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Title Section
             Text(
                 text = "View All Cards",
                 modifier = Modifier
@@ -83,7 +80,6 @@ fun AllCardsScreenContent(uiState: AllCardsUiSate) {
                 fontSize = 16.sp
             )
 
-            // Content State Handling
             when {
                 uiState.isLoading -> {
                     LoadingComponent()
@@ -108,7 +104,7 @@ fun AllCardsHeader() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp) // Adjust height as needed
+            .height(100.dp)
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(CoopDarkGreen, CoopGreen)
@@ -118,14 +114,14 @@ fun AllCardsHeader() {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding() // Handle system status bar overlap
+                .statusBarsPadding()
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Profile Picture
+
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data("https://i.pravatar.cc/150?u=wanjiku") // Placeholder
+                    .data("") // TODO: add user profile
                     .crossfade(true)
                     .build(),
                 contentDescription = "Profile Picture",
@@ -136,13 +132,10 @@ fun AllCardsHeader() {
                     .background(Color.White)
             )
 
-            // Centered Title "Hi Wanjiku"
-            // We use a weight trick to center the text relative to the screen,
-            // ignoring the size of the profile pic on the left
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "Hi Wanjiku",
+                text = "Hi",// TODO: add usesname
                 color = Color.White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
@@ -151,8 +144,7 @@ fun AllCardsHeader() {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Dummy spacer to balance the profile pic width on the right side
-            // so the text is perfectly centered
+
             Spacer(modifier = Modifier.size(40.dp))
         }
     }
@@ -168,7 +160,6 @@ fun LazyContent(modifier: Modifier = Modifier, cards: List<Card>) {
         items(items = cards) { card ->
             CardComponent(card = card)
         }
-        // Add extra padding at bottom for better scrolling experience
         item {
             Spacer(modifier = Modifier.height(24.dp))
         }
@@ -183,7 +174,6 @@ private fun AllCardsScreenPreview() {
             isLoading = false,
             error = "",
             cards = listOf(
-                // 1. Active Debit Card (Green)
                 Card(
                     id = "1",
                     name = "Debit Card",
@@ -200,7 +190,6 @@ private fun AllCardsScreenPreview() {
                     dueDate = "",
                     userId = "user123"
                 ),
-                // 2. Blocked Multi-Currency Card (Light Green)
                 Card(
                     id = "2",
                     name = "Multi-Currency",
@@ -217,7 +206,6 @@ private fun AllCardsScreenPreview() {
                     dueDate = "",
                     userId = "user123"
                 ),
-                // 3. Active Prepaid Card (Black/Dark Gray)
                 Card(
                     id = "3",
                     name = "Prepaid Card",
@@ -234,7 +222,6 @@ private fun AllCardsScreenPreview() {
                     dueDate = "",
                     userId = "user123"
                 ),
-                // 4. Active Credit Card (Green)
                 Card(
                     id = "4",
                     name = "Credit Card",
